@@ -63,7 +63,9 @@ namespace GestaoDeEquipamentos
             }
             else if (opcaoMenuEquipamentos == "2")
             {
-
+                editarEquipamento(ref nomeEquipamentos, ref preçoEquipamentos,
+                ref numeroSerieEquipamentos, ref dataFabricacaoEquipamentos,
+                ref fabricanteEquipamentos, ref contador);
             }
             else if (opcaoMenuEquipamentos == "3")
             {
@@ -72,9 +74,12 @@ namespace GestaoDeEquipamentos
                 ref fabricanteEquipamentos, ref contador);
 
             }
-
-
-
+            else if (opcaoMenuEquipamentos == "4")
+            {
+                excluirEquipamento(ref nomeEquipamentos, ref preçoEquipamentos,
+                ref numeroSerieEquipamentos, ref dataFabricacaoEquipamentos,
+                ref fabricanteEquipamentos, ref contador);
+            }
 
 
 
@@ -124,28 +129,52 @@ namespace GestaoDeEquipamentos
 
             Console.WriteLine("Informe o fabricante do equipamento:");
             fabricanteEquipamentos[contador] = Console.ReadLine();
+        }
 
-
-            // vizualizar todos os equipamentos registrados
-
-            static void vizualizarEquipamento (ref string[] nomeEquipamentos, ref decimal[] preçoEquipamentos,
-            ref int[] numeroSerieEquipamentos, ref string[] dataFabricacaoEquipamentos,
-            ref string[] fabricanteEquipamentos, ref int contador)
-            {
-                Console.WriteLine("Nome: " + nomeEquipamentos[contador] + "- Numero de série: "
-                                + numeroSerieEquipamentos[contador] + "- Fabricante: " + fabricanteEquipamentos[contador]);
-            }
-
-
-
-
-
-
-
+        //Editar quipamento 
+        static void editarEquipamento (ref string[] nomeEquipamentos, ref decimal[] preçoEquipamentos,
+        ref int[] numeroSerieEquipamentos, ref string[] dataFabricacaoEquipamentos,
+        ref string[] fabricanteEquipamentos, ref int contador)
+        {
 
 
 
         }
+
+
+        // vizualizar todos os equipamentos registrados
+
+        static void vizualizarEquipamento(ref string[] nomeEquipamentos, ref decimal[] preçoEquipamentos,
+        ref int[] numeroSerieEquipamentos, ref string[] dataFabricacaoEquipamentos,
+        ref string[] fabricanteEquipamentos, ref int contador)
+        {
+            for (int i = 0; i < contador; i++)
+            {
+                Console.WriteLine("Nome: " + nomeEquipamentos[contador] + "- Numero de série: "
+                                               + numeroSerieEquipamentos[contador] + "- Fabricante: "
+                                               + fabricanteEquipamentos[contador]);
+            }
+
+        }
+
+        // Excluir equipamentos
+
+        static void excluirEquipamento(ref string[] nomeEquipamentos, ref decimal[] preçoEquipamentos,
+        ref int[] numeroSerieEquipamentos, ref string[] dataFabricacaoEquipamentos,
+        ref string[] fabricanteEquipamentos, ref int contador)
+        {
+
+
+        }
+
+
+
+
+
+
+
+
+
 
 
 
