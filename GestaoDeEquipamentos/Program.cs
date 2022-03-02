@@ -38,7 +38,7 @@ namespace GestaoDeEquipamentos
                 if (opcaomenu == "1")
                 {
                     MenuEquipamentos(ref nomeequipamentos, ref precoAquisicao, ref numeroDeSerie,
-            ref dataDeFabricação, ref fabricante, ref numeroDeRegistro, ref id, ref equipamentoChamado);
+            ref dataDeFabricação, ref fabricante, ref numeroDeRegistro, ref id, ref equipamentoChamado, ref numeroChamados);
                 }
                 else if (opcaomenu == "2")
                 {
@@ -64,7 +64,8 @@ namespace GestaoDeEquipamentos
         }
         //menu equipamentos *******************
         static void MenuEquipamentos(ref string[] nomeequipamentos, ref decimal[] precoAquisicao, ref int[] numeroDeSerie,
-            ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id, ref string[] equipamentoChamado)
+            ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id, ref string[] equipamentoChamado,
+            ref int numeroChamados)
         {
             Console.WriteLine("Menu equipamentos");
             Console.WriteLine("Digite 1 para adicionar equipamento");
@@ -92,11 +93,12 @@ namespace GestaoDeEquipamentos
             }
             else if (opcaoEquipamentos == "4")
             {
-                excluirEquipamentos(ref nomeequipamentos, ref precoAquisicao, ref numeroDeSerie,
-            ref dataDeFabricação, ref fabricante, ref numeroDeRegistro, ref id, ref equipamentoChamado);
+                excluirEquipamentos(ref  nomeequipamentos, ref  precoAquisicao, ref  numeroDeSerie,
+            ref  dataDeFabricação, ref  fabricante, ref  numeroDeRegistro, ref  id, ref  equipamentoChamado,
+            ref  numeroChamados);
             }
-        }
 
+        }
 
         //menu chamados ************
 
@@ -131,9 +133,9 @@ namespace GestaoDeEquipamentos
             }
             else if (opcaoChamadas == "4")
             {
-                excluirChamado(ref  nomeDoChamado, ref  descricaoDoChamado, ref  dataAberturaChamado,
-                ref  equipamentoChamado, ref  numeroDeRegistro, ref  nomeequipamentos,
-            ref  idChamados, ref  numeroChamados);
+                excluirChamado(ref nomeDoChamado, ref descricaoDoChamado, ref dataAberturaChamado,
+                ref equipamentoChamado, ref numeroDeRegistro, ref nomeequipamentos,
+            ref idChamados, ref numeroChamados);
             }
 
 
@@ -261,7 +263,8 @@ namespace GestaoDeEquipamentos
         }
 
         static void excluirEquipamentos(ref string[] nomeequipamentos, ref decimal[] precoAquisicao, ref int[] numeroDeSerie,
-            ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id, ref string[] equipamentoChamado)
+            ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id, ref string[] equipamentoChamado,
+            ref int numeroChamados)
         {
             //mostrar os equipamentos 
             vizualizarEquipamentos(ref nomeequipamentos, ref precoAquisicao, ref numeroDeSerie,
@@ -270,26 +273,52 @@ namespace GestaoDeEquipamentos
             Console.WriteLine("Digite o ID do equipamento que queira excluir: ");
             int idDeExclusao = Convert.ToInt32(Console.ReadLine());
 
-            if (nomeequipamentos[idDeExclusao] == equipamentoChamado[idDeExclusao])
+
+            int quantiaDeGiros = 0;
+            bool podeExcluir = true;
+            if (numeroDeRegistro == 0)
             {
-                Console.WriteLine("Não pode ser excluido, esta com chamado aberto!! ");
+                Console.WriteLine("Sem nenhum equipamentos registrado!");
             }
             else
             {
-                for (int i = idDeExclusao; i < numeroDeRegistro; i++)
+                if (numeroDeRegistro > numeroChamados)
                 {
-                    nomeequipamentos[i] = nomeequipamentos[i + 1];
-                    precoAquisicao[i] = precoAquisicao[i + 1];
-                    numeroDeSerie[i] = numeroDeSerie[i + 1];
-                    dataDeFabricação[i] = dataDeFabricação[i + 1];
-                    fabricante[i] = fabricante[i + 1];
-
+                    quantiaDeGiros = numeroDeRegistro;
                 }
-                numeroDeRegistro--;
-                Console.WriteLine("Equipamento excluido com sucesso !!");
+                else
+                {
+                    quantiaDeGiros = numeroChamados;
+                }
+                for (int i = 0; i < quantiaDeGiros; i++)
+                {
+                    if (equipamentoChamado[i] == nomeequipamentos[idDeExclusao])
+                    {
+                        podeExcluir = false;
+                    }
+                }
+                if (podeExcluir == false)
+                {
+                    Console.WriteLine("equipamento atrelado a um chamado");
+                }
+
+
+                if (podeExcluir == true)
+                {
+                    for (int i = idDeExclusao; i < numeroDeRegistro; i++)
+                    {
+                        nomeequipamentos[i] = nomeequipamentos[i + 1];
+                        precoAquisicao[i] = precoAquisicao[i + 1];
+                        numeroDeSerie[i] = numeroDeSerie[i + 1];
+                        dataDeFabricação[i] = dataDeFabricação[i + 1];
+                        fabricante[i] = fabricante[i + 1];
+
+                    }
+                    numeroDeRegistro--;
+                    Console.WriteLine("Equipamento excluido com sucesso !!");
+                }
+
             }
-
-
         }
 
 
@@ -326,8 +355,9 @@ namespace GestaoDeEquipamentos
             ref string[] equipamentoChamado, ref int numeroChamados, ref string[] nomeequipamentos, ref decimal[] precoAquisicao, ref int[] numeroDeSerie,
             ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id, ref int[] idChamados)
         {
-            vizualizarEquipamentos(ref nomeequipamentos, ref precoAquisicao, ref numeroDeSerie,
-            ref dataDeFabricação, ref fabricante, ref numeroDeRegistro, ref id);
+            vizualizarChamado(ref nomeDoChamado, ref descricaoDoChamado, ref dataAberturaChamado,
+                ref equipamentoChamado, ref numeroDeRegistro, ref nomeequipamentos,
+            ref idChamados, ref numeroChamados);
 
             Console.WriteLine("Digite o ID do chamado que queira editar: ");
             int numeroDeEdicao = Convert.ToInt32(Console.ReadLine());
