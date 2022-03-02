@@ -21,8 +21,8 @@ namespace GestaoDeEquipamentos
             string[] descricaoDoChamado = new string[1000];
             string[] dataAberturaChamado = new string[1000];
             string[] equipamentoChamado = new string[1000];
-            int [] idChamados = new int [1000];
-            int [] diasEmAberto = new int [1000];   
+            int[] idChamados = new int[1000];
+
             int numeroChamados = 0;
 
 
@@ -43,8 +43,8 @@ namespace GestaoDeEquipamentos
                 else if (opcaomenu == "2")
                 {
                     MenuChamados(ref nomeDoChamado, ref descricaoDoChamado, ref dataAberturaChamado,
-            ref equipamentoChamado, ref numeroChamados, ref nomeequipamentos, ref  precoAquisicao, ref  numeroDeSerie,
-            ref  dataDeFabricação, ref  fabricante, ref  numeroDeRegistro, ref  id);
+            ref equipamentoChamado, ref numeroChamados, ref nomeequipamentos, ref precoAquisicao, ref numeroDeSerie,
+            ref dataDeFabricação, ref fabricante, ref numeroDeRegistro, ref id, ref idChamados);
                 }
                 else if (opcaomenu == "s")
                 {
@@ -64,7 +64,7 @@ namespace GestaoDeEquipamentos
         }
         //menu equipamentos *******************
         static void MenuEquipamentos(ref string[] nomeequipamentos, ref decimal[] precoAquisicao, ref int[] numeroDeSerie,
-            ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id , ref string[] equipamentoChamado)
+            ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id, ref string[] equipamentoChamado)
         {
             Console.WriteLine("Menu equipamentos");
             Console.WriteLine("Digite 1 para adicionar equipamento");
@@ -96,13 +96,13 @@ namespace GestaoDeEquipamentos
             ref dataDeFabricação, ref fabricante, ref numeroDeRegistro, ref id, ref equipamentoChamado);
             }
         }
-        
-        
+
+
         //menu chamados ************
-        
+
         static void MenuChamados(ref string[] nomeDoChamado, ref string[] descricaoDoChamado, ref string[] dataAberturaChamado,
             ref string[] equipamentoChamado, ref int numeroChamados, ref string[] nomeequipamentos, ref decimal[] precoAquisicao, ref int[] numeroDeSerie,
-            ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id)
+            ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id, ref int[] idChamados)
         {
             Console.WriteLine("Menu chamados");
             Console.WriteLine("Digite 1 para adicionar chamados");
@@ -113,24 +113,27 @@ namespace GestaoDeEquipamentos
 
             if (opcaoChamadas == "1")
             {
-                adicionarChamado(ref nomeDoChamado, ref  descricaoDoChamado, ref  dataAberturaChamado,
-            ref  equipamentoChamado, ref numeroChamados, ref nomeequipamentos , ref  precoAquisicao, ref  numeroDeSerie,
-            ref  dataDeFabricação, ref  fabricante, ref  numeroDeRegistro, ref  id);
+                adicionarChamado(ref nomeDoChamado, ref descricaoDoChamado, ref dataAberturaChamado,
+            ref equipamentoChamado, ref numeroChamados, ref nomeequipamentos, ref precoAquisicao, ref numeroDeSerie,
+            ref dataDeFabricação, ref fabricante, ref numeroDeRegistro, ref id, ref idChamados);
             }
             else if (opcaoChamadas == "2")
             {
                 editarChamado(ref nomeDoChamado, ref descricaoDoChamado, ref dataAberturaChamado,
-            ref equipamentoChamado, ref numeroChamados);
+            ref equipamentoChamado, ref numeroChamados, ref nomeequipamentos, ref precoAquisicao, ref numeroDeSerie,
+            ref dataDeFabricação, ref fabricante, ref numeroDeRegistro, ref id, ref idChamados);
             }
             else if (opcaoChamadas == "3")
             {
                 vizualizarChamado(ref nomeDoChamado, ref descricaoDoChamado, ref dataAberturaChamado,
-            ref equipamentoChamado, ref numeroChamados);
+                ref equipamentoChamado, ref numeroDeRegistro, ref nomeequipamentos,
+            ref idChamados, ref numeroChamados);
             }
             else if (opcaoChamadas == "4")
             {
-                excluirChamado(ref nomeDoChamado, ref descricaoDoChamado, ref dataAberturaChamado,
-            ref equipamentoChamado, ref numeroChamados);
+                excluirChamado(ref  nomeDoChamado, ref  descricaoDoChamado, ref  dataAberturaChamado,
+                ref  equipamentoChamado, ref  numeroDeRegistro, ref  nomeequipamentos,
+            ref  idChamados, ref  numeroChamados);
             }
 
 
@@ -293,11 +296,11 @@ namespace GestaoDeEquipamentos
 
         // Menu criação chamados *******************
         static void adicionarChamado(ref string[] nomeDoChamado, ref string[] descricaoDoChamado, ref string[] dataAberturaChamado,
-            ref string[] equipamentoChamado, ref int numeroChamados, ref string [] nomeequipamentos, ref decimal[] precoAquisicao, ref int[] numeroDeSerie,
-            ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id)
+            ref string[] equipamentoChamado, ref int numeroChamados, ref string[] nomeequipamentos, ref decimal[] precoAquisicao, ref int[] numeroDeSerie,
+            ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id, ref int[] idChamados)
         {
-            vizualizarEquipamentos(ref  nomeequipamentos, ref precoAquisicao, ref  numeroDeSerie,
-            ref  dataDeFabricação, ref  fabricante, ref  numeroDeRegistro, ref  id); 
+            vizualizarEquipamentos(ref nomeequipamentos, ref precoAquisicao, ref numeroDeSerie,
+            ref dataDeFabricação, ref fabricante, ref numeroDeRegistro, ref id);
 
             Console.WriteLine("Digite o titulo do chamado: ");
             nomeDoChamado[numeroChamados] = Console.ReadLine();
@@ -306,39 +309,157 @@ namespace GestaoDeEquipamentos
             descricaoDoChamado[numeroChamados] = Console.ReadLine();
 
             Console.WriteLine("Digite ID do equipamento a ser feito o chamdo:");
-            int posicaoId = Convert.ToInt32(Console.ReadLine());    
+            int posicaoId = Convert.ToInt32(Console.ReadLine());
             equipamentoChamado[numeroChamados] = nomeequipamentos[posicaoId];
 
             Console.WriteLine("Digite a data de abertura (d/m/a):");
-            equipamentoChamado[numeroChamados] = Console.ReadLine();
+            dataAberturaChamado[numeroChamados] = Console.ReadLine();
+
+            idChamados[numeroChamados] = numeroChamados;
 
             numeroChamados++;
 
         }
 
+        // editar chamados ***********
         static void editarChamado(ref string[] nomeDoChamado, ref string[] descricaoDoChamado, ref string[] dataAberturaChamado,
-            ref string[] equipamentoChamado, ref int numeroDeRegistro)
+            ref string[] equipamentoChamado, ref int numeroChamados, ref string[] nomeequipamentos, ref decimal[] precoAquisicao, ref int[] numeroDeSerie,
+            ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id, ref int[] idChamados)
         {
+            vizualizarEquipamentos(ref nomeequipamentos, ref precoAquisicao, ref numeroDeSerie,
+            ref dataDeFabricação, ref fabricante, ref numeroDeRegistro, ref id);
+
+            Console.WriteLine("Digite o ID do chamado que queira editar: ");
+            int numeroDeEdicao = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Digite 1 para editar o titulo do chamado:");
+            Console.WriteLine("Digite 2 para editar a descrição do chamado:");
+            Console.WriteLine("Digite 3 para editar o equipamento do chamado:");
+            Console.WriteLine("Digite 4 para editar a data de abertura do chamado:");
+
+            string opcao = Console.ReadLine();
+
+            while (true)
+            {
+                if (opcao != "1" && opcao != "2" && opcao != "3" && opcao != "4")
+                {
+                    Console.WriteLine("Opção invalida:");
+                    Console.WriteLine("Digite 1 para editar o titulo do chamado:");
+                    Console.WriteLine("Digite 2 para editar a descrição do chamado:");
+                    Console.WriteLine("Digite 3 para editar o equipamento do chamado:");
+                    Console.WriteLine("Digite 4 para editar a data de abertura do chamado:");
+
+                    opcao = Console.ReadLine();
+                }
+                else
+                {
+                    break;
+                }
+            }
+            if (opcao == "1")
+            {
+                Console.WriteLine("Digite o novo titulo do chamado:");
+                nomeDoChamado[numeroDeEdicao] = Console.ReadLine();
+            }
+            else if (opcao == "2")
+            {
+                Console.WriteLine("Digite a nova descrição do chamado:");
+                descricaoDoChamado[numeroDeEdicao] = Console.ReadLine();
+            }
+            else if (opcao == "3")
+            {
+                Console.WriteLine("Digite o ID do novo equipamento do chamado:");
+                int idSeletivo = Convert.ToInt32(Console.ReadLine());
+                equipamentoChamado[numeroDeEdicao] = nomeequipamentos[idSeletivo];
+            }
+            else if (opcao == "4")
+            {
+                Console.WriteLine("Digite a nova data de abertura do chamado:");
+                dataAberturaChamado[numeroDeEdicao] = Console.ReadLine();
+            }
+
+
 
         }
 
+        //vizualizar chamados ***********
         static void vizualizarChamado(ref string[] nomeDoChamado, ref string[] descricaoDoChamado, ref string[] dataAberturaChamado,
-            ref string[] equipamentoChamado, ref int numeroDeRegistro)
+                ref string[] equipamentoChamado, ref int numeroDeRegistro, ref string[] nomeequipamentos,
+            ref int[] idChamados, ref int numeroChamados)
         {
+            if (numeroChamados == 0)
+            {
+                Console.WriteLine("Sem chamadas registradas");
+            }
+            else
+            {
+                for (int i = 0; i < numeroChamados; i++)
+                {
+                    Console.WriteLine("ID chamados" + idChamados[i] + "- Título chamado:" + nomeDoChamado[i] +
+                        "- Equipamento: " + equipamentoChamado[i] + "- Data de abertura" +
+                        dataAberturaChamado[i]);
+
+
+                    DateTime hoje = DateTime.Now;
+                    string strDataAbertoChamado = dataAberturaChamado[i];
+                    string[] dataSeparada = strDataAbertoChamado.Split("/");
+                    int dia = int.Parse(dataSeparada[0]);    //0   1   2
+                    int mes = int.Parse(dataSeparada[1]);   // 02 /03 /2022
+                    int ano = int.Parse(dataSeparada[2]);
+                    DateTime criacaoDoChamado = new DateTime(ano, mes, dia);
+                    int diasAberto = (hoje - criacaoDoChamado).Days;
+                    Console.Write("Dias em aberto......: ");
+                    Console.WriteLine(diasAberto + " dias...");
+                    Console.WriteLine();
+
+                }
+            }
 
         }
 
+        //excluir chamados ***************
         static void excluirChamado(ref string[] nomeDoChamado, ref string[] descricaoDoChamado, ref string[] dataAberturaChamado,
-            ref string[] equipamentoChamado, ref int numeroDeRegistro)
+                ref string[] equipamentoChamado, ref int numeroDeRegistro, ref string[] nomeequipamentos,
+            ref int[] idChamados, ref int numeroChamados)
         {
+            vizualizarChamado(ref nomeDoChamado, ref descricaoDoChamado, ref dataAberturaChamado,
+                ref equipamentoChamado, ref numeroDeRegistro, ref nomeequipamentos,
+            ref idChamados, ref numeroChamados);
+
+            Console.WriteLine("Digite o ID do chamado que queira excluir: ");
+            int idDeExclusao = Convert.ToInt32(Console.ReadLine());
+
+            if (numeroChamados == 0)
+            {
+                Console.WriteLine("Não pode ser excluido, esta com chamado aberto!! ");
+            }
+            else
+            {
+                for (int i = idDeExclusao; i < numeroChamados; i++)
+                {
+                    nomeDoChamado[i] = nomeDoChamado[i + 1];
+                    descricaoDoChamado[i] = descricaoDoChamado[i + 1];
+                    dataAberturaChamado[i] = dataAberturaChamado[i + 1];
+                    equipamentoChamado[i] = equipamentoChamado[i + 1];
+
+                }
+                numeroDeRegistro--;
+                Console.WriteLine("Chamado excluido com sucesso !!");
+
+            }
+
+
+
+
+
 
         }
-
-
 
 
     }
+
 }
+
 
 
 
