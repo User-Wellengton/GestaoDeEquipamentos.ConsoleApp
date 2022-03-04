@@ -38,7 +38,13 @@ namespace GestaoDeEquipamentos
 
             while (true)
             {
-                Console.WriteLine("Digite 1 para equipamentos\nDigite 2 para chamados\nDigite s para sair");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("GESTAO DE EQUIPAMENTOS ");
+                Console.ResetColor();
+                Console.WriteLine("Digite 1 para menu Solicitantes:");
+                Console.WriteLine("Digite 2 para menu Equipamentos:");
+                Console.WriteLine("Digite 3 para menu Chamado:");
+                Console.WriteLine("Digite S para menu Sair:");
 
                 string opcaomenu = Console.ReadLine();
                 if (opcaomenu == "1")
@@ -71,7 +77,7 @@ namespace GestaoDeEquipamentos
 
             }
 
-
+            Console.Clear();
             //menu solicitante ****************
             static void menuSolicitante(ref string[] nomeSolicitantes, ref string[] emailSolicitantes, ref string[] telefoneSolicitentes,
                 ref int[] idSolicitantes, ref int numeroSolicitante)
@@ -100,11 +106,11 @@ namespace GestaoDeEquipamentos
                 {
                     excluirSolicitante(ref nomeSolicitantes, ref emailSolicitantes, ref telefoneSolicitentes, ref idSolicitantes, ref numeroSolicitante);
                 }
-                Console.Clear();
+
 
 
             }
-
+            Console.Clear();
             // metodo adicionar solicitante **************
             static void adicionarSolicitante(ref string[] nomeSolicitantes, ref string[] emailSolicitantes, ref string[] telefoneSolicitentes,
                 ref int[] idSolicitantes, ref int numeroSolicitante)
@@ -136,6 +142,8 @@ namespace GestaoDeEquipamentos
 
                 Console.WriteLine("Digite o numero de telefone do solicitante:");
                 telefoneSolicitentes[numeroSolicitante] = Console.ReadLine();
+
+                numeroSolicitante++;
             }
 
             // metodo editar solicitante **************
@@ -193,17 +201,20 @@ namespace GestaoDeEquipamentos
             static void vizualizarSolicitante(ref string[] nomeSolicitantes, ref string[] emailSolicitantes, ref string[] telefoneSolicitentes,
                 ref int[] idSolicitantes, ref int numeroSolicitante)
             {
-                if (numeroSolicitante == 0)
+                while (numeroSolicitante == 0)
                 {
-                    Console.WriteLine("Sem equipamentos registrados");
+                    if (numeroSolicitante == 0)
+                    {
+                        Console.WriteLine("Sem solicitante registrados");
+                        break;
+                    }
                 }
-
-                else
+                if (numeroSolicitante >= 1)
                 {
                     for (int i = 0; i < numeroSolicitante; i++)
                     {
-                        Console.WriteLine("ID: " + idSolicitantes[i] + "- Nome: " + nomeSolicitantes[i] + "- Numero de série: " +
-                            emailSolicitantes[i] + "- Fabricante: " + telefoneSolicitentes[i]);
+                        Console.WriteLine("ID: " + idSolicitantes[i] + " - Nome: " + nomeSolicitantes[i] + " - Email: " +
+                            emailSolicitantes[i] + " - Telefone: " + telefoneSolicitentes[i]);
                     }
                 }
             }
@@ -375,69 +386,83 @@ namespace GestaoDeEquipamentos
                 vizualizarEquipamentos(ref nomeequipamentos, ref precoAquisicao, ref numeroDeSerie,
                 ref dataDeFabricação, ref fabricante, ref numeroDeRegistro, ref id);
 
-                Console.WriteLine("Digite o ID do equipamento que queira editar: ");
-                int numeroDeEdicao = Convert.ToInt32(Console.ReadLine());
 
-                Console.WriteLine("Digite 1 para editar o nome:");
-                Console.WriteLine("Digite 2 para editar o preço:");
-                Console.WriteLine("Digite 3 para editar o numero de série:");
-                Console.WriteLine("Digite 4 para editar o data de fabricação:");
-                Console.WriteLine("Digite 5 para editar o fabricante:");
-                string opcao = Console.ReadLine();
 
-                while (true)
+                if (numeroDeRegistro == 0)
                 {
-                    if (opcao != "1" && opcao != "2" && opcao != "3" && opcao != "4" && opcao != "5")
+                    Console.WriteLine("Não possui equipamentos registrados!!");
+
+                }
+
+                else if (numeroDeRegistro >= 1)
+                {
+                    Console.WriteLine("Digite o ID do equipamento que queira editar: ");
+                    int numeroDeEdicao = Convert.ToInt32(Console.ReadLine());
+
+
+                    Console.WriteLine("Digite 1 para editar o nome:");
+                    Console.WriteLine("Digite 2 para editar o preço:");
+                    Console.WriteLine("Digite 3 para editar o numero de série:");
+                    Console.WriteLine("Digite 4 para editar o data de fabricação:");
+                    Console.WriteLine("Digite 5 para editar o fabricante:");
+                    string opcao = Console.ReadLine();
+
+                    while (true)
                     {
-                        Console.WriteLine("Opção invalida:");
-                        Console.WriteLine("Digite 1 para editar o nome:");
-                        Console.WriteLine("Digite 2 para editar o preço:");
-                        Console.WriteLine("Digite 3 para editar o numero de série:");
-                        Console.WriteLine("Digite 4 para editar o data de fabricação:");
-                        Console.WriteLine("Digite 5 para editar o fabricante:");
-                        opcao = Console.ReadLine();
+                        if (opcao != "1" && opcao != "2" && opcao != "3" && opcao != "4" && opcao != "5")
+                        {
+                            Console.WriteLine("Opção invalida:");
+                            Console.WriteLine("Digite 1 para editar o nome:");
+                            Console.WriteLine("Digite 2 para editar o preço:");
+                            Console.WriteLine("Digite 3 para editar o numero de série:");
+                            Console.WriteLine("Digite 4 para editar o data de fabricação:");
+                            Console.WriteLine("Digite 5 para editar o fabricante:");
+                            opcao = Console.ReadLine();
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
-                    else
+                    if (opcao == "1")
                     {
+                        Console.WriteLine("Digite o nome:");
+                        nomeequipamentos[numeroDeEdicao] = Console.ReadLine();
+                    }
+                    else if (opcao == "2")
+                    {
+                        Console.WriteLine("Digite o preço:");
+                        precoAquisicao[numeroDeEdicao] = Convert.ToDecimal(Console.ReadLine());
+                    }
+                    else if (opcao == "3")
+                    {
+                        Console.WriteLine("Digite o numero de série:");
+                        numeroDeSerie[numeroDeEdicao] = Convert.ToInt32(Console.ReadLine());
+                    }
+                    else if (opcao == "4")
+                    {
+                        Console.WriteLine("Digite a data de fabricação:");
+                        dataDeFabricação[numeroDeEdicao] = Console.ReadLine();
+                    }
+                    else if (opcao == "5")
+                    {
+                        Console.WriteLine("Digite o fabricante:");
+                        fabricante[numeroDeEdicao] = Console.ReadLine();
+                    }
+                }
+            }
+            static void vizualizarEquipamentos(ref string[] nomeequipamentos, ref decimal[] precoAquisicao, ref int[] numeroDeSerie,
+                    ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id)
+            {
+                while (numeroDeRegistro == 0)
+                {
+                    if (numeroDeRegistro == 0)
+                    {
+                        Console.WriteLine("Sem equipamentos registrados");
                         break;
                     }
                 }
-                if (opcao == "1")
-                {
-                    Console.WriteLine("Digite o nome:");
-                    nomeequipamentos[numeroDeEdicao] = Console.ReadLine();
-                }
-                else if (opcao == "2")
-                {
-                    Console.WriteLine("Digite o preço:");
-                    precoAquisicao[numeroDeEdicao] = Convert.ToDecimal(Console.ReadLine());
-                }
-                else if (opcao == "3")
-                {
-                    Console.WriteLine("Digite o numero de série:");
-                    numeroDeSerie[numeroDeEdicao] = Convert.ToInt32(Console.ReadLine());
-                }
-                else if (opcao == "4")
-                {
-                    Console.WriteLine("Digite a data de fabricação:");
-                    dataDeFabricação[numeroDeEdicao] = Console.ReadLine();
-                }
-                else if (opcao == "5")
-                {
-                    Console.WriteLine("Digite o fabricante:");
-                    fabricante[numeroDeEdicao] = Console.ReadLine();
-                }
-            }
-
-            static void vizualizarEquipamentos(ref string[] nomeequipamentos, ref decimal[] precoAquisicao, ref int[] numeroDeSerie,
-                ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id)
-            {
-                if (numeroDeRegistro == 0)
-                {
-                    Console.WriteLine("Sem equipamentos registrados");
-                }
-
-                else
+                if (numeroDeRegistro >= 1)
                 {
                     for (int i = 0; i < numeroDeRegistro; i++)
                     {
@@ -446,6 +471,7 @@ namespace GestaoDeEquipamentos
                     }
                 }
             }
+
 
             static void excluirEquipamentos(ref string[] nomeequipamentos, ref decimal[] precoAquisicao, ref int[] numeroDeSerie,
                 ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id, ref string[] equipamentoChamado,
@@ -662,13 +688,8 @@ namespace GestaoDeEquipamentos
                     Console.WriteLine("Chamado excluido com sucesso !!");
 
                 }
-
-
-
-
-
-
             }
+
 
         }
     }
