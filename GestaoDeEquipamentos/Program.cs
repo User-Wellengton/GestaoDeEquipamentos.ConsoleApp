@@ -37,8 +37,9 @@ namespace GestaoDeEquipamentos
 
 
             while (true)
-            {Console.Clear(); 
-                
+            {
+                Console.Clear();
+
 
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("GESTAO DE EQUIPAMENTOS ");
@@ -88,7 +89,7 @@ namespace GestaoDeEquipamentos
                 Console.WriteLine("Menu Solicitante");
                 Console.WriteLine("Digite 1 para adicionar solicitante");
                 Console.WriteLine("Digite 2 para editar solicitante");
-                Console.WriteLine("Digite 3 para visualiza silicitação");
+                Console.WriteLine("Digite 3 para visualiza solicitação");
                 Console.WriteLine("Digite 4 para excluir o solicitação");
                 string opcaoSolicitante = Console.ReadLine();
 
@@ -113,7 +114,7 @@ namespace GestaoDeEquipamentos
 
 
             }
-           
+
             // metodo adicionar solicitante **************
             static void adicionarSolicitante(ref string[] nomeSolicitantes, ref string[] emailSolicitantes, ref string[] telefoneSolicitentes,
                 ref int[] idSolicitantes, ref int numeroSolicitante)
@@ -146,15 +147,25 @@ namespace GestaoDeEquipamentos
 
                 Console.WriteLine("Digite o numero de telefone do solicitante:");
                 telefoneSolicitentes[numeroSolicitante] = Console.ReadLine();
-
+               
                 numeroSolicitante++;
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Adicionado com sucesso!!");
+                Console.ResetColor();
+
+                vizualizarSolicitante(ref nomeSolicitantes, ref emailSolicitantes, ref telefoneSolicitentes,
+               ref idSolicitantes, ref numeroSolicitante);
+
+                Console.ReadLine(); 
+
             }
 
             // metodo editar solicitante **************
             static void editarSolicitante(ref string[] nomeSolicitantes, ref string[] emailSolicitantes, ref string[] telefoneSolicitentes,
                 ref int[] idSolicitantes, ref int numeroSolicitante)
             {
-                
+
                 Console.Clear();
                 vizualizarSolicitante(ref nomeSolicitantes, ref emailSolicitantes, ref telefoneSolicitentes,
                 ref idSolicitantes, ref numeroSolicitante);
@@ -185,19 +196,28 @@ namespace GestaoDeEquipamentos
                 }
                 if (opcao == "1")
                 {
-                    Console.WriteLine("Digite 1 para editar o nome do solicitante:");
+                    Console.WriteLine("Digite o novo nome do solicitante:");
                     nomeSolicitantes[numeroDeEdicao] = Console.ReadLine();
                 }
                 else if (opcao == "2")
                 {
-                    Console.WriteLine("Digite 2 para editar o email do solicitante:");
+                    Console.WriteLine("digite o novo email do solicitante:");
                     emailSolicitantes[numeroDeEdicao] = Console.ReadLine();
                 }
                 else if (opcao == "3")
                 {
-                    Console.WriteLine("Digite 3 para editar o numero de telefone:");
+                    Console.WriteLine("Digiteo novo numero de telefone do solicitante:");
                     telefoneSolicitentes[numeroDeEdicao] = Console.ReadLine();
                 }
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Editado com sucesso!!");
+                Console.ResetColor();
+
+                vizualizarSolicitante(ref nomeSolicitantes, ref emailSolicitantes, ref telefoneSolicitentes,
+                ref idSolicitantes, ref numeroSolicitante);
+
+                Console.ReadLine();
 
             }
 
@@ -222,10 +242,12 @@ namespace GestaoDeEquipamentos
                     {
                         Console.WriteLine("ID: " + idSolicitantes[i]);
                         Console.WriteLine(" Nome: " + nomeSolicitantes[i]);
-                        Console.WriteLine(" Email: " + emailSolicitantes[i] );
-                        Console.WriteLine( "Telefone: " + telefoneSolicitentes[i]);
+                        Console.WriteLine(" Email: " + emailSolicitantes[i]);
+                        Console.WriteLine("Telefone: " + telefoneSolicitentes[i]);
                     }
                 }
+
+                Console.ReadLine();
             }
 
             // metodo remover solicitante **************
@@ -237,7 +259,7 @@ namespace GestaoDeEquipamentos
                 ref idSolicitantes, ref numeroSolicitante);
 
 
-                Console.WriteLine("Digite o ID do chamado que queira excluir: ");
+                Console.WriteLine("Digite o ID do solicitante que queira excluir: ");
                 int idDeExclusao = Convert.ToInt32(Console.ReadLine());
 
                 if (numeroSolicitante == 0)
@@ -255,11 +277,16 @@ namespace GestaoDeEquipamentos
 
                     }
                     numeroSolicitante--;
+
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("Chamado excluido com sucesso !!");
+                    Console.ResetColor();
 
 
+                    vizualizarSolicitante(ref nomeSolicitantes, ref emailSolicitantes, ref telefoneSolicitentes,
+                ref idSolicitantes, ref numeroSolicitante);
 
-
+                    Console.ReadLine();
                 }
 
             }
@@ -390,6 +417,15 @@ namespace GestaoDeEquipamentos
 
                 numeroDeRegistro++;
 
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Adicionado com sucesso!!");
+                Console.ResetColor();
+
+                vizualizarEquipamentos(ref nomeequipamentos, ref precoAquisicao, ref numeroDeSerie,
+                ref dataDeFabricação, ref fabricante, ref numeroDeRegistro, ref id);
+
+                Console.ReadLine();
+
             }
 
             static void editarEquipamento(ref string[] nomeequipamentos, ref decimal[] precoAquisicao, ref int[] numeroDeSerie,
@@ -463,6 +499,17 @@ namespace GestaoDeEquipamentos
                         fabricante[numeroDeEdicao] = Console.ReadLine();
                     }
                 }
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Editado com sucesso!!");
+                Console.ResetColor();
+
+                vizualizarEquipamentos(ref nomeequipamentos, ref precoAquisicao, ref numeroDeSerie,
+                ref dataDeFabricação, ref fabricante, ref numeroDeRegistro, ref id);
+
+                Console.ReadLine();
+
+
             }
             static void vizualizarEquipamentos(ref string[] nomeequipamentos, ref decimal[] precoAquisicao, ref int[] numeroDeSerie,
                     ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id)
@@ -482,13 +529,15 @@ namespace GestaoDeEquipamentos
                     {
                         Console.WriteLine("ID: " + id[i]);
 
-                        Console.WriteLine( "Nome: " + nomeequipamentos[i]);
+                        Console.WriteLine("Nome: " + nomeequipamentos[i]);
 
                         Console.WriteLine(" Numero de série: " + numeroDeSerie[i]);
 
                         Console.WriteLine(" Fabricante: " + fabricante[i]);
                     }
                 }
+
+                Console.ReadLine();
             }
 
 
@@ -550,6 +599,15 @@ namespace GestaoDeEquipamentos
                     }
 
                 }
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Excluido com sucesso!!");
+                Console.ResetColor();
+
+                vizualizarEquipamentos(ref nomeequipamentos, ref precoAquisicao, ref numeroDeSerie,
+                ref dataDeFabricação, ref fabricante, ref numeroDeRegistro, ref id);
+
+                Console.ReadLine();
             }
 
 
@@ -579,6 +637,16 @@ namespace GestaoDeEquipamentos
                 idChamados[numeroChamados] = numeroChamados;
 
                 numeroChamados++;
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Adicionado com sucesso!!");
+                Console.ResetColor();
+
+                vizualizarChamado(ref nomeDoChamado, ref descricaoDoChamado, ref dataAberturaChamado,
+                    ref equipamentoChamado, ref numeroDeRegistro, ref nomeequipamentos,
+                ref idChamados, ref numeroChamados);
+
+                Console.ReadLine();
 
             }
 
@@ -641,7 +709,15 @@ namespace GestaoDeEquipamentos
                     dataAberturaChamado[numeroDeEdicao] = Console.ReadLine();
                 }
 
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Editado com sucesso!!");
+                Console.ResetColor();
 
+                vizualizarChamado(ref nomeDoChamado, ref descricaoDoChamado, ref dataAberturaChamado,
+                    ref equipamentoChamado, ref numeroDeRegistro, ref nomeequipamentos,
+                ref idChamados, ref numeroChamados);
+
+                Console.ReadLine();
 
             }
 
@@ -683,6 +759,7 @@ namespace GestaoDeEquipamentos
                     }
                 }
 
+                Console.ReadLine();
             }
 
             //excluir chamados ***************
@@ -716,6 +793,18 @@ namespace GestaoDeEquipamentos
                     Console.WriteLine("Chamado excluido com sucesso !!");
 
                 }
+
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Excluido com sucesso!!");
+                Console.ResetColor();
+
+                vizualizarChamado(ref nomeDoChamado, ref descricaoDoChamado, ref dataAberturaChamado,
+                    ref equipamentoChamado, ref numeroDeRegistro, ref nomeequipamentos,
+                ref idChamados, ref numeroChamados);
+
+                Console.ReadLine();
+
             }
 
 
