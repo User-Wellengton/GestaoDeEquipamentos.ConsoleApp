@@ -37,7 +37,9 @@ namespace GestaoDeEquipamentos
 
 
             while (true)
-            {
+            {Console.Clear(); 
+                
+
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("GESTAO DE EQUIPAMENTOS ");
                 Console.ResetColor();
@@ -82,6 +84,7 @@ namespace GestaoDeEquipamentos
             static void menuSolicitante(ref string[] nomeSolicitantes, ref string[] emailSolicitantes, ref string[] telefoneSolicitentes,
                 ref int[] idSolicitantes, ref int numeroSolicitante)
             {
+                Console.Clear();
                 Console.WriteLine("Menu Solicitante");
                 Console.WriteLine("Digite 1 para adicionar solicitante");
                 Console.WriteLine("Digite 2 para editar solicitante");
@@ -110,11 +113,12 @@ namespace GestaoDeEquipamentos
 
 
             }
-            Console.Clear();
+           
             // metodo adicionar solicitante **************
             static void adicionarSolicitante(ref string[] nomeSolicitantes, ref string[] emailSolicitantes, ref string[] telefoneSolicitentes,
                 ref int[] idSolicitantes, ref int numeroSolicitante)
             {
+                Console.Clear();
                 string nome;
                 while (true)
                 {
@@ -150,6 +154,8 @@ namespace GestaoDeEquipamentos
             static void editarSolicitante(ref string[] nomeSolicitantes, ref string[] emailSolicitantes, ref string[] telefoneSolicitentes,
                 ref int[] idSolicitantes, ref int numeroSolicitante)
             {
+                
+                Console.Clear();
                 vizualizarSolicitante(ref nomeSolicitantes, ref emailSolicitantes, ref telefoneSolicitentes,
                 ref idSolicitantes, ref numeroSolicitante);
 
@@ -201,6 +207,7 @@ namespace GestaoDeEquipamentos
             static void vizualizarSolicitante(ref string[] nomeSolicitantes, ref string[] emailSolicitantes, ref string[] telefoneSolicitentes,
                 ref int[] idSolicitantes, ref int numeroSolicitante)
             {
+                Console.Clear();
                 while (numeroSolicitante == 0)
                 {
                     if (numeroSolicitante == 0)
@@ -213,8 +220,10 @@ namespace GestaoDeEquipamentos
                 {
                     for (int i = 0; i < numeroSolicitante; i++)
                     {
-                        Console.WriteLine("ID: " + idSolicitantes[i] + " - Nome: " + nomeSolicitantes[i] + " - Email: " +
-                            emailSolicitantes[i] + " - Telefone: " + telefoneSolicitentes[i]);
+                        Console.WriteLine("ID: " + idSolicitantes[i]);
+                        Console.WriteLine(" Nome: " + nomeSolicitantes[i]);
+                        Console.WriteLine(" Email: " + emailSolicitantes[i] );
+                        Console.WriteLine( "Telefone: " + telefoneSolicitentes[i]);
                     }
                 }
             }
@@ -223,6 +232,7 @@ namespace GestaoDeEquipamentos
             static void excluirSolicitante(ref string[] nomeSolicitantes, ref string[] emailSolicitantes, ref string[] telefoneSolicitentes,
                  ref int[] idSolicitantes, ref int numeroSolicitante)
             {
+                Console.Clear();
                 vizualizarSolicitante(ref nomeSolicitantes, ref emailSolicitantes, ref telefoneSolicitentes,
                 ref idSolicitantes, ref numeroSolicitante);
 
@@ -259,6 +269,7 @@ namespace GestaoDeEquipamentos
                 ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id, ref string[] equipamentoChamado,
                 ref int numeroChamados)
             {
+                Console.Clear();
                 Console.WriteLine("Menu equipamentos");
                 Console.WriteLine("Digite 1 para adicionar equipamento");
                 Console.WriteLine("Digite 2 para editar equipamento");
@@ -298,6 +309,7 @@ namespace GestaoDeEquipamentos
                 ref string[] equipamentoChamado, ref int numeroChamados, ref string[] nomeequipamentos, ref decimal[] precoAquisicao, ref int[] numeroDeSerie,
                 ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id, ref int[] idChamados)
             {
+                Console.Clear();
                 Console.WriteLine("Menu chamados");
                 Console.WriteLine("Digite 1 para adicionar chamados");
                 Console.WriteLine("Digite 2 para editar chamados");
@@ -338,6 +350,7 @@ namespace GestaoDeEquipamentos
             static void adicionarEquipamento(ref string[] nomeequipamentos, ref decimal[] precoAquisicao, ref int[] numeroDeSerie,
                 ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id)
             {
+                Console.Clear();
                 string nome;
                 while (true)
                 {
@@ -382,7 +395,7 @@ namespace GestaoDeEquipamentos
             static void editarEquipamento(ref string[] nomeequipamentos, ref decimal[] precoAquisicao, ref int[] numeroDeSerie,
                 ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id)
             {
-
+                Console.Clear();
                 vizualizarEquipamentos(ref nomeequipamentos, ref precoAquisicao, ref numeroDeSerie,
                 ref dataDeFabricação, ref fabricante, ref numeroDeRegistro, ref id);
 
@@ -454,6 +467,7 @@ namespace GestaoDeEquipamentos
             static void vizualizarEquipamentos(ref string[] nomeequipamentos, ref decimal[] precoAquisicao, ref int[] numeroDeSerie,
                     ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id)
             {
+                Console.Clear();
                 while (numeroDeRegistro == 0)
                 {
                     if (numeroDeRegistro == 0)
@@ -466,8 +480,13 @@ namespace GestaoDeEquipamentos
                 {
                     for (int i = 0; i < numeroDeRegistro; i++)
                     {
-                        Console.WriteLine("ID: " + id[i] + "- Nome: " + nomeequipamentos[i] + "- Numero de série: " +
-                            numeroDeSerie[i] + "- Fabricante: " + fabricante[i]);
+                        Console.WriteLine("ID: " + id[i]);
+
+                        Console.WriteLine( "Nome: " + nomeequipamentos[i]);
+
+                        Console.WriteLine(" Numero de série: " + numeroDeSerie[i]);
+
+                        Console.WriteLine(" Fabricante: " + fabricante[i]);
                     }
                 }
             }
@@ -477,6 +496,7 @@ namespace GestaoDeEquipamentos
                 ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id, ref string[] equipamentoChamado,
                 ref int numeroChamados)
             {
+                Console.Clear();
                 //mostrar os equipamentos 
                 vizualizarEquipamentos(ref nomeequipamentos, ref precoAquisicao, ref numeroDeSerie,
                 ref dataDeFabricação, ref fabricante, ref numeroDeRegistro, ref id);
@@ -539,6 +559,7 @@ namespace GestaoDeEquipamentos
                 ref string[] equipamentoChamado, ref int numeroChamados, ref string[] nomeequipamentos, ref decimal[] precoAquisicao, ref int[] numeroDeSerie,
                 ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id, ref int[] idChamados)
             {
+                Console.Clear();
                 vizualizarEquipamentos(ref nomeequipamentos, ref precoAquisicao, ref numeroDeSerie,
                 ref dataDeFabricação, ref fabricante, ref numeroDeRegistro, ref id);
 
@@ -566,6 +587,7 @@ namespace GestaoDeEquipamentos
                 ref string[] equipamentoChamado, ref int numeroChamados, ref string[] nomeequipamentos, ref decimal[] precoAquisicao, ref int[] numeroDeSerie,
                 ref string[] dataDeFabricação, ref string[] fabricante, ref int numeroDeRegistro, ref int[] id, ref int[] idChamados)
             {
+                Console.Clear();
                 vizualizarChamado(ref nomeDoChamado, ref descricaoDoChamado, ref dataAberturaChamado,
                     ref equipamentoChamado, ref numeroDeRegistro, ref nomeequipamentos,
                 ref idChamados, ref numeroChamados);
@@ -628,6 +650,7 @@ namespace GestaoDeEquipamentos
                     ref string[] equipamentoChamado, ref int numeroDeRegistro, ref string[] nomeequipamentos,
                 ref int[] idChamados, ref int numeroChamados)
             {
+                Console.Clear();
                 if (numeroChamados == 0)
                 {
                     Console.WriteLine("Sem chamadas registradas");
@@ -636,9 +659,13 @@ namespace GestaoDeEquipamentos
                 {
                     for (int i = 0; i < numeroChamados; i++)
                     {
-                        Console.WriteLine("ID chamados" + idChamados[i] + "- Título chamado:" + nomeDoChamado[i] +
-                            "- Equipamento: " + equipamentoChamado[i] + "- Data de abertura" +
-                            dataAberturaChamado[i]);
+                        Console.WriteLine("ID chamados" + idChamados[i]);
+
+                        Console.WriteLine("- Título chamado:" + nomeDoChamado[i]);
+
+                        Console.WriteLine(" Equipamento: " + equipamentoChamado[i]);
+
+                        Console.WriteLine("Data de abertura" + dataAberturaChamado[i]);
 
 
                         DateTime hoje = DateTime.Now;
@@ -663,6 +690,7 @@ namespace GestaoDeEquipamentos
                     ref string[] equipamentoChamado, ref int numeroDeRegistro, ref string[] nomeequipamentos,
                 ref int[] idChamados, ref int numeroChamados)
             {
+                Console.Clear();
                 vizualizarChamado(ref nomeDoChamado, ref descricaoDoChamado, ref dataAberturaChamado,
                     ref equipamentoChamado, ref numeroDeRegistro, ref nomeequipamentos,
                 ref idChamados, ref numeroChamados);
